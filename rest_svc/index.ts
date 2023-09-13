@@ -1,4 +1,5 @@
 import express, { Express, Request, Response , Application } from 'express';
+import { redisClient } from './config/redis/cache';
 import dotenv from 'dotenv';
 import { router } from './routes/user.routes';
 import morgan from 'morgan';
@@ -27,6 +28,17 @@ postgresClient()
   .catch((error) => {
     console.error("Failed to connect to the database:", error);
   });
+
+// caching Server
+const cacheServer = async () => {
+  try {
+    await redisClient.connect()
+    console.log('Connected to Redis server');
+  }catch(error) {
+    console.log('failed to connect redis server: ',error)
+  }
+}
+cacheServer()
 
 // @middlewares
 app.use(express.json())

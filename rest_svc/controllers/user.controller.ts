@@ -5,7 +5,7 @@ import { validationResult } from "express-validator";
 import { Prisma } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { redisClient } from "../config/redis/cache";
 
 const HashPassword = async (password: string) => {
   return bcrypt.hash(password, 10);
@@ -135,19 +135,31 @@ let DeleteUser = async (req: Request, res: Response) => {
 
 let GetUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
-  try {
-    // Find the user with the specified ID
-    const user = await prisma.user.findUnique({
-      where: { id: Number(userId) },
-    });
+  let user;
+  let isCached = false;
 
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
+  try {
+    const cacheResults = await redisClient.get(`user:${userId}`);
+    if (cacheResults) {
+      isCached = true;
+      user = JSON.parse(cacheResults);
+    } else {
+      user = await prisma.user.findUnique({
+        where: { id: Number(userId) },
       });
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+      if (user === null) {
+        throw "API returned an empty array";
+      }
+      await redisClient.set(`user:${userId}`, JSON.stringify(user));
     }
 
     res.status(200).json({
+      fromCache: isCached,
       message: "User retrieved successfully",
       user,
     });
