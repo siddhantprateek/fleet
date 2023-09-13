@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  cache:
+    image: redis/redis-stack:latest
+    container_name: redis
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    ports:
+      - 6379:6379
+      - 8001:8001
+    volumes:
+      - rediscache:/data
+    networks:
+      - fleetnet
+  
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - fleetnet
+  
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=fleetdb
+    ports:
+      - 5432:5432
+    networks:
+      - fleetnet
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+networks:
+  fleetnet:
+
+volumes:
+  mongodata:
+  pgdata:
+  rediscache:
