@@ -3,19 +3,23 @@
 ## Application Tech Stack
 
 ### For `Rest-svc`:
-- Express.js
-- TypeScript
-- Prisma
-- Postgres
-- Redis
+- `Express.js`
+- `TypeScript`
+- `Prisma`
+- `Postgres`
+- `Redis`
 
 ### For `Comm-svc`:
 
-- Nest.js (Server-side framework)
-- TypeScript
-- Redis (Caching)
-- Postgres (Storing user data)
-- WebSocket for real-time communication with clients
+- `Nest.js` (Server-side framework)
+- `TypeScript`
+- `Redis` (Caching)
+- `Postgres` (Storing user data)
+- `WebSocket` for real-time communication with clients
+
+## API Documentation
+
+Explore the Fleet API by referring to the [API Documentation](https://documenter.getpostman.com/view/16181974/2s9YC4UD7a) provided via Postman. This documentation contains detailed information about the available endpoints, request formats, and sample responses to help you interact with the API effectively.
 
 ## Folder Structure
 ```
