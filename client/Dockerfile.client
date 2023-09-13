@@ -1,0 +1,9 @@
+FROM oven/bun
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json*", "./"]
+RUN bun install && mv node_modules ../
+COPY . .
+RUN chown -R bun /usr/src/app
+ENV REACT_APP_SOCKET_SERVER_URL=http://localhost:8000 
+USER bun
+CMD ["bun", "start"]
