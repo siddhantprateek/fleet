@@ -73,6 +73,8 @@ services:
       - fleetnet
     depends_on:
       - mongo
+    volumes:
+      - ./comm_svc/node_modules:/app/node_modules
 
   # client:
   #   build:
