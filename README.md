@@ -83,6 +83,14 @@ npm install # resolve all dependencies
 npm run start:dev
 ```
 
+## Automating Requests to Server 
+
+For automating HTTP requests to a server.
+
+```bash
+./scripts/test-request.sh
+```
+
 
 ## Author
 
