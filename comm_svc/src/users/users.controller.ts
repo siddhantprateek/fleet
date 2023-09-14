@@ -12,15 +12,23 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('register')
   async create(@Res() response, @Body() createUserDto: CreateUserDto) {
     try {
-      const newUser = await this.usersService.create(createUserDto);
+      const saltOrRounds = 10;
+      const hashPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
+      const userToCreate = {
+        ...createUserDto,
+        password: hashPassword
+      };
+      const newUser = await this.usersService.create(userToCreate);
       return response.status(HttpStatus.CREATED).json({
         message: 'user has been created successfully',
         newUser,
@@ -33,6 +41,26 @@ export class UsersController {
       });
     }
   }
+
+  @Post('login')
+  async authenticate(@Res() response, @Body() loginUserdto: LoginUserDto) {
+
+    try {
+      const { email, password } = loginUserdto;
+      const token = await this.usersService.authenticate(email, password);
+      return response.status(HttpStatus.CREATED).json({
+        message: 'user is successfully authenticated.',
+        token,
+      });
+    } catch (err) {
+      return response.status(HttpStatus.BAD_REQUEST).json({
+        statusCode: 400,
+        message: 'Error: User not authenticated!',
+        error: 'Bad Request',
+      });
+    }
+  }
+  
 
   @Get()
   async findAll(@Res() response) {

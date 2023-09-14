@@ -3,10 +3,16 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { usersProvider } from './users.provider';
 import { DatabaseModule } from 'src/database/database.module';
-// import { WebsocketGateway } from 'src/websocket/websocket.gateway';
+import { JwtModule } from '@nestjs/jwt';
 import { WebsocketGateway } from './websocket/websocket.gateway';
+import { jwtConstants } from './auth/constants';
+
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, JwtModule.register({
+    global: true,
+    secret: jwtConstants.secret,
+    signOptions: { expiresIn: '1h' },
+  })],
   controllers: [UsersController],
   providers: [UsersService, ...usersProvider, WebsocketGateway],
 })
