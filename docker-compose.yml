@@ -42,12 +42,12 @@ services:
 
   rest-service:
     build:
-      context: /rest_svc
+      context: ./rest_svc
       dockerfile: Dockerfile.restsvc
     environment:
       PORT: 8090
       DATABASE_URL: "postgresql://postgres:dev@postgres:5432/fleetdb?schema=public"
-      JWT_SECRET:
+      JWT_SECRET: something-secret
       REDIS_HOST: cache
       REDIS_PORT: 6379
       REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
@@ -61,10 +61,11 @@ services:
 
   comm-service:
     build:
-      context: /rest_svc
+      context: ./comm_svc
       dockerfile: Dockerfile.commsvc
     environment:
       PORT: 8000
+      JWT_SECRET: something-secret
       MONGO_URL: mongodb://root:root@mongo:27017
     ports:
       - 8000:8000
@@ -73,11 +74,12 @@ services:
     depends_on:
       - mongo
 
-  fleet-client:
+  client:
     build:
-      context: /client
+      context: ./client
       dockerfile: Dockerfile.client 
     environment:
+      NODE_ENV: production
       REACT_APP_SOCKET_SERVER_URL: http://comm-service:8000
     ports:
       - 3000:3000

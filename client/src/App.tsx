@@ -6,7 +6,7 @@ function App() {
   const [logEntries, setLogEntries] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_SOCKET_SERVER_URL || "");
+    const socket = io(process.env.REACT_APP_SOCKET_SERVER_URL || "http://comm-service:8000");
     socket.on('connect', () => {
       console.log('Connected to WebSocket server');
     });

@@ -49,18 +49,6 @@ cd rest_svc
 npm install # resolve all dependencies
 ```
 
-**Configure Database Connection**
-
-- Open the `.env` file in the `rest_svc` directory.
-- Set the `DATABASE_URL` variable to point to your existing database. If your database doesn't have tables yet, you can refer to the [Prisma Getting Started Guide](https://pris.ly/d/getting-started) for assistance.
-
-**Generate Prisma Schema**
-
-- Run the following command to generate the Prisma schema based on your database schema:
-```bash
-npx prisma db pull
-```
-
 **Generate Prisma Client**
 
 - Generate the Prisma Client by running the following command:
@@ -83,6 +71,11 @@ To get started with the `COMM_SVC` component of the Fleet application, follow th
 ```bash
 cd comm_svc
 npm install # resolve all dependencies
+```
+
+## To start the `comm-svc` server 
+```bash
+npm run start:dev
 ```
 
 

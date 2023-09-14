@@ -1,7 +1,22 @@
-FROM node:18
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM node:18.12.1 AS base
+WORKDIR /app
+COPY package.json ./
 RUN npm install
+RUN npm rebuild bcrypt --build-from-source
 COPY . .
 RUN npm run build
-CMD [ "node", "src/main.ts" ]
+
+FROM node:18.12.1 AS prod
+WORKDIR /app
+
+COPY --from=base /app/node_modules/ ./node_modules
+COPY --from=base /app/package.json ./package.json
+COPY --from=base /app/dist ./dist
+COPY --from=base /app/src ./src
+COPY --from=base /app/tsconfig* ./
+
+ENV PORT=${PORT}
+ENV JWT_SECRET=${JWT_SECRET}
+ENV MONGO_URI=${MONGO_URI}
+
+CMD ["node", "dist/main"]
