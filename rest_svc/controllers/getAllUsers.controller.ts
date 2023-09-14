@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { Prisma } from "@prisma/client"; // Import Prisma
 import { prisma } from "../config/postgres/postgres";
 
+// Get All Users
+// @params: 
+// @method: GET
+// @route: /api/users
 const GetAllUser = async (req: Request, res: Response) => {
   const page = parseInt(req.query.page as string) || 1; // Get the requested page number (default to 1)
   const pageSize = parseInt(req.query.pageSize as string) || 10; // Get the page size (default to 10)

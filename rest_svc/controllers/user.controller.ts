@@ -51,6 +51,10 @@ const CreateUser = async (req: Request, res: Response) => {
   }
 };
 
+// Handle User Authentication
+// @body: email, password
+// @method: POST
+// @route: /api/authenticate
 let AuthenticateUser = async (req: Request, res: Response) => {
   const { email, password }: IUserLogin = req.body;
 
@@ -103,8 +107,16 @@ let AuthenticateUser = async (req: Request, res: Response) => {
   }
 };
 
+// Handle User registration
+// @params: user
+// @method: PATCH
+// @route: /api/update/:id
 let UpdateUser = async (req: Request, res: Response) => {};
 
+// Handle Deletion of User
+// @params: id
+// @method: DELETE
+// @route: /api/users/:id
 let DeleteUser = async (req: Request, res: Response) => {
   const userId = req.params.id; // Assuming you have a route parameter for the user ID
 
@@ -135,6 +147,10 @@ let DeleteUser = async (req: Request, res: Response) => {
   }
 };
 
+// Handle to retrieve User data
+// @params: id
+// @method: GET
+// @route: /api/users/:id
 let GetUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
   let user;

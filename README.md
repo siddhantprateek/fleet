@@ -23,6 +23,12 @@
 - `Postgres` (Storing user data)
 - `WebSocket` for real-time communication with clients
 
+## For `Client`
+
+- `React` (Client-side framework)
+- `Typescript`
+- `WebSocket-Client`
+
 ## API Documentation
 
 Explore the Fleet API by referring to the [API Documentation](https://documenter.getpostman.com/view/16181974/2s9YC4UD7a) provided via Postman. This documentation contains detailed information about the available endpoints, request formats, and sample responses to help you interact with the API effectively.
@@ -32,6 +38,7 @@ Explore the Fleet API by referring to the [API Documentation](https://documenter
 .
 ├── comm_svc # Comm Service
 └── rest_svc # RESTful Service
+└── client   # Client Service
 ├── Dockerfile
 ├── docker-compose.yml
 ├── README.md
@@ -78,9 +85,25 @@ cd comm_svc
 npm install # resolve all dependencies
 ```
 
-## To start the `comm-svc` server 
+### To start the `comm-svc` server 
 ```bash
 npm run start:dev
+```
+
+## Setting up `client` environment
+
+- To install client side dependencies
+```bash
+cd client
+npm install 
+# or
+bun install
+```
+-  To start client application
+```bash
+npm run start
+# 
+bun run start
 ```
 
 ## Automating Requests to Server 
