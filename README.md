@@ -1,5 +1,6 @@
 # Fleet 
 
+
 ## Application Tech Stack
 
 ### For `Rest-svc`:
@@ -40,9 +41,6 @@ docker-compose up -d
 
 
 ### Setting `dev` environment for `REST_SVC`
-
-
-
 
 To get started with the `REST_SVC` component of the Fleet application, follow these steps:
 
