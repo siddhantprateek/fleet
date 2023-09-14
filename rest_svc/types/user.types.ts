@@ -6,9 +6,16 @@ interface IUserCreate {
   company: string;
 }
 
+interface IDecode {
+    userId: number;
+    userEmail: string;
+    iat: number;
+    exp: number;
+}
+
 interface IUserLogin {
   email: string;
   password: string;
 }
 
-export { IUserCreate, IUserLogin };
+export { IUserCreate, IUserLogin, IDecode };
