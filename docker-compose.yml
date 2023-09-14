@@ -74,23 +74,27 @@ services:
     depends_on:
       - mongo
 
-  client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile.client 
-    environment:
-      NODE_ENV: production
-      REACT_APP_SOCKET_SERVER_URL: http://comm-service:8000
-    ports:
-      - 3000:3000
-    networks:
-      - fleetnet
-
+  # client:
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile.client 
+  #   environment:
+  #     NODE_ENV: production
+  #     REACT_APP_SOCKET_SERVER_URL: http://comm-service:8000
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - fleetnet
+    # depends_on:
+      # - comm-service
+      # - rest-service
 
 networks:
   fleetnet:
 
 volumes:
   mongodata:
+    driver: bridge
   pgdata:
+    driver: bridge
   rediscache:
