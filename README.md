@@ -2,6 +2,8 @@
 
 > Take away home task
 
+- [Video Link](https://www.loom.com/share/86c217d5e3c04d7a9596c0a87a465f2e?sid=a3450f67-0496-48c0-b854-00ec0daa069f)
+
 ## Architecture
 
 ![](./assets/fleet-dg.png)
@@ -12,7 +14,7 @@
 - `Express.js`
 - `TypeScript`
 - `Prisma`
-- `Postgres`
+- `Postgres` (Storing user data)
 - `Redis`
 
 ### For `Comm-svc`:
