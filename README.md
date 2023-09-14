@@ -1,5 +1,10 @@
 # Fleet 
 
+> Take away home task
+
+## Architecture
+
+![](./assets/fleet-dg.png)
 
 ## Application Tech Stack
 
