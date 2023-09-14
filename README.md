@@ -19,8 +19,7 @@
 
 - `Nest.js` (Server-side framework)
 - `TypeScript`
-- `Redis` (Caching)
-- `Postgres` (Storing user data)
+- `Mongo` (Storing user data)
 - `WebSocket` for real-time communication with clients
 
 ## For `Client`
@@ -117,4 +116,4 @@ For automating HTTP requests to a server.
 
 ## Author
 
-- [Siddhant Prateek Mahanayak]()
+- [Siddhant Prateek Mahanayak](https://github.com/siddhantprateek)
