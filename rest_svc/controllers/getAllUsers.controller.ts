@@ -37,13 +37,13 @@ const GetAllUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Users retrieved successfully",
-      users,
       pagination: {
         page,
         pageSize,
         totalPages: Math.ceil(totalCount / pageSize),
         totalItems: totalCount,
       },
+      users,
     });
   } catch (error) {
     console.error("Error retrieving users:", error);
